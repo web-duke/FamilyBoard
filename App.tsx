@@ -1,23 +1,27 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { View, Text } from "react-native";
+import styled from "styled-components/native";
 import { useTranslation } from "react-i18next";
 import "./localization/i18n";
+
+const Container = styled.View`
+  flex: 1;
+  background-color: red;
+  align-items: center;
+  justify-content: center;
+`;
+
+const WelcomeText = styled.Text`
+  color: blue;
+  font-size: 24px;
+`;
 
 export default function App() {
   const { t } = useTranslation();
 
   return (
-    <View style={styles.container}>
-      <Text>{t("welcome")}</Text>
-    </View>
+    <Container>
+      <WelcomeText>{t("welcome")}</WelcomeText>
+    </Container>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
