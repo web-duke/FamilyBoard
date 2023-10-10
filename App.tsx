@@ -1,8 +1,6 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { ThemeProvider } from "react-native-elements";
 import styled from "styled-components/native";
-import { useTranslation } from "react-i18next";
 
 import "./config/firebase";
 import RootNavigation from "./navigation";
@@ -22,14 +20,9 @@ const WelcomeText = styled.Text`
 `;
 
 export default function App() {
-  const { t } = useTranslation();
-
   return (
     <ThemeProvider>
       <RootNavigation />
-      {/* <Container>
-        <WelcomeText>{t("welcome")}</WelcomeText>
-      </Container> */}
     </ThemeProvider>
   );
 }

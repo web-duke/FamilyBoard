@@ -1,7 +1,17 @@
 const fr = {
   translation: {
-    welcome: "Bienvenue",
-    hello: "Salut, {{name}}!",
+    familyBoard: "Family Board",
+    home: "Accueil",
+    signIn: "Connexion",
+    signUp: "Inscription",
+    signOut: "Déconnexion",
+    email: "Courriel",
+    password: "Mot de passe",
+
+    errors: {
+      emailPasswordMandatory:
+        "le courriel et le mot de passe sont obligatoires",
+    },
   },
 };
 

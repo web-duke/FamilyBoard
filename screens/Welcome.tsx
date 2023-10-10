@@ -1,26 +1,25 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
 import { StackScreenProps } from "@react-navigation/stack";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-elements";
 
 const Welcome: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+  const { t } = useTranslation();
+
   return (
     <View style={styles.container}>
-      <Text>Welcome screen!</Text>
-
-      <View style={styles.buttons}>
-        <Button
-          title="Sign in"
-          buttonStyle={styles.button}
-          onPress={() => navigation.navigate("Sign In")}
-        />
-        <Button
-          title="Sign up"
-          type="outline"
-          buttonStyle={styles.button}
-          onPress={() => navigation.navigate("Sign Up")}
-        />
-      </View>
+      <Button
+        title={t("signIn")}
+        buttonStyle={styles.button}
+        onPress={() => navigation.navigate(t("signIn"))}
+      />
+      <Button
+        title={t("signUp")}
+        type="outline"
+        buttonStyle={styles.button}
+        onPress={() => navigation.navigate(t("signUp"))}
+      />
     </View>
   );
 };

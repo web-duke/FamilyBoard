@@ -1,31 +1,32 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { useAuthentication } from "../utils/hooks/useAuthentication";
-import { Button } from "react-native-elements";
 import { getAuth, signOut } from "firebase/auth";
-const auth = getAuth(); // obtenir l'instance d'authentification
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, View } from "react-native";
+import { Button } from "react-native-elements";
 
-export default function Home() {
-  const { user } = useAuthentication();
+const auth = getAuth();
+
+const Home: React.FC = () => {
+  const { t } = useTranslation();
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      // L'utilisateur est maintenant déconnecté
-      // Vous pouvez mettre à jour l'état de l'application ici, si nécessaire
     } catch (error) {
-      console.error("Erreur lors de la déconnexion :", error);
+      console.error(error);
     }
   };
 
   return (
     <View style={styles.container}>
-      <Text>Welcome {user?.email}!</Text>
-
-      <Button title="Sign Out" style={styles.button} onPress={handleSignOut} />
+      <Button
+        title={t("signOut")}
+        style={styles.button}
+        onPress={handleSignOut}
+      />
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -38,3 +39,5 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
 });
+
+export default Home;

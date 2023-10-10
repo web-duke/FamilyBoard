@@ -1,12 +1,15 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input, Button } from "react-native-elements";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, Text, View } from "react-native";
+import { Button, Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const auth = getAuth();
 
-const SignIn = () => {
+const SignIn: React.FC = () => {
+  const { t } = useTranslation();
+
   const [value, setValue] = React.useState({
     email: "",
     password: "",
@@ -17,7 +20,7 @@ const SignIn = () => {
     if (value.email === "" || value.password === "") {
       setValue({
         ...value,
-        error: "Email and password are mandatory.",
+        error: t("errors.emailPasswordMandatory"),
       });
       return;
     }
@@ -34,8 +37,6 @@ const SignIn = () => {
 
   return (
     <View style={styles.container}>
-      <Text>Signin screen!</Text>
-
       {!!value.error && (
         <View style={styles.error}>
           <Text>{value.error}</Text>
@@ -45,7 +46,7 @@ const SignIn = () => {
       <View style={styles.controls}>
         <Input
           style={styles.input}
-          placeholder="Email"
+          placeholder={t("email")}
           containerStyle={styles.control}
           value={value.email}
           onChangeText={(text) => setValue({ ...value, email: text })}
@@ -54,7 +55,7 @@ const SignIn = () => {
 
         <Input
           style={styles.input}
-          placeholder="Password"
+          placeholder={t("password")}
           containerStyle={styles.control}
           value={value.password}
           onChangeText={(text) => setValue({ ...value, password: text })}
@@ -62,7 +63,11 @@ const SignIn = () => {
           leftIcon={<Icon name="key" size={16} />}
         />
 
-        <Button title="Sign in" buttonStyle={styles.control} onPress={signIn} />
+        <Button
+          title={t("signIn")}
+          buttonStyle={styles.control}
+          onPress={signIn}
+        />
       </View>
     </View>
   );

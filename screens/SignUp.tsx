@@ -1,13 +1,16 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/FontAwesome";
-import { Input, Button } from "react-native-elements";
 import { StackScreenProps } from "@react-navigation/stack";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { StyleSheet, Text, View } from "react-native";
+import { Button, Input } from "react-native-elements";
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const auth = getAuth();
 
 const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
+  const { t } = useTranslation();
+
   const [value, setValue] = React.useState({
     email: "",
     password: "",
@@ -18,14 +21,14 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     if (value.email === "" || value.password === "") {
       setValue({
         ...value,
-        error: "Email and password are mandatory.",
+        error: t("errors.emailPasswordMandatory"),
       });
       return;
     }
 
     try {
       await createUserWithEmailAndPassword(auth, value.email, value.password);
-      navigation.navigate("Sign In");
+      navigation.navigate(t("signIn"));
     } catch (error) {
       setValue({
         ...value,
@@ -36,8 +39,6 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text>Signup screen!</Text>
-
       {!!value.error && (
         <View style={styles.error}>
           <Text>{value.error}</Text>
@@ -47,7 +48,7 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       <View style={styles.controls}>
         <Input
           style={styles.input}
-          placeholder="Email"
+          placeholder={t("email")}
           containerStyle={styles.control}
           value={value.email}
           onChangeText={(text) => setValue({ ...value, email: text })}
@@ -56,7 +57,7 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 
         <Input
           style={styles.input}
-          placeholder="Password"
+          placeholder={t("password")}
           containerStyle={styles.control}
           value={value.password}
           onChangeText={(text) => setValue({ ...value, password: text })}
@@ -64,7 +65,11 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
           leftIcon={<Icon name="key" size={16} />}
         />
 
-        <Button title="Sign up" buttonStyle={styles.control} onPress={signUp} />
+        <Button
+          title={t("signUp")}
+          buttonStyle={styles.control}
+          onPress={signUp}
+        />
       </View>
     </View>
   );
