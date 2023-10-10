@@ -2,10 +2,10 @@ import React from "react";
 import { ThemeProvider } from "react-native-elements";
 import styled from "styled-components/native";
 
-import "./config/firebase";
-import RootNavigation from "./navigation";
+import "../config/firebase";
+import RootNavigation from "../navigation";
 
-import "./localization/i18n";
+import "../localization/i18n";
 
 const Container = styled.View`
   flex: 1;
