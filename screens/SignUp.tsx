@@ -2,9 +2,28 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
+import styled from "styled-components/native";
+
+const StyledView = styled.View`
+  flex: 1;
+  padding-top: 20;
+  padding-right: 20;
+  padding-bottom: 20;
+  padding-left: 20;
+  justify-content: center;
+  gap: 20;
+`;
+
+const StyledTextError = styled.Text`
+  padding-top: 20;
+  padding-right: 20;
+  padding-bottom: 20;
+  padding-left: 20;
+  background-color: red;
+  color: #ffffff;
+`;
 
 const auth = getAuth();
 
@@ -38,71 +57,27 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
-      {!!value.error && (
-        <View style={styles.error}>
-          <Text>{value.error}</Text>
-        </View>
-      )}
+    <StyledView>
+      {!!value.error && <StyledTextError>{value.error}</StyledTextError>}
 
-      <View style={styles.controls}>
-        <Input
-          style={styles.input}
-          placeholder={t("email")}
-          containerStyle={styles.control}
-          value={value.email}
-          onChangeText={(text) => setValue({ ...value, email: text })}
-          leftIcon={<Icon name="envelope" size={16} />}
-        />
+      <Input
+        placeholder={t("email")}
+        value={value.email}
+        onChangeText={(text) => setValue({ ...value, email: text })}
+        leftIcon={<Icon name="envelope" size={16} />}
+      />
 
-        <Input
-          style={styles.input}
-          placeholder={t("password")}
-          containerStyle={styles.control}
-          value={value.password}
-          onChangeText={(text) => setValue({ ...value, password: text })}
-          secureTextEntry={true}
-          leftIcon={<Icon name="key" size={16} />}
-        />
+      <Input
+        placeholder={t("password")}
+        value={value.password}
+        onChangeText={(text) => setValue({ ...value, password: text })}
+        secureTextEntry={true}
+        leftIcon={<Icon name="key" size={16} />}
+      />
 
-        <Button
-          title={t("signUp")}
-          buttonStyle={styles.control}
-          onPress={signUp}
-        />
-      </View>
-    </View>
+      <Button title={t("signUp")} onPress={signUp} />
+    </StyledView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingTop: 20,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  controls: {
-    flex: 1,
-    width: "100%",
-  },
-
-  input: {
-    width: "100%",
-  },
-
-  control: {
-    marginTop: 10,
-  },
-
-  error: {
-    marginTop: 10,
-    padding: 10,
-    color: "#fff",
-    backgroundColor: "#D54826FF",
-  },
-});
 
 export default SignUp;

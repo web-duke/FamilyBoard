@@ -1,8 +1,18 @@
 import { getAuth, signOut } from "firebase/auth";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
 import { Button } from "react-native-elements";
+import styled from "styled-components/native";
+
+const StyledView = styled.View`
+  flex: 1;
+  padding-top: 20;
+  padding-right: 20;
+  padding-bottom: 20;
+  padding-left: 20;
+  justify-content: center;
+  gap: 20;
+`;
 
 const auth = getAuth();
 
@@ -18,26 +28,10 @@ const Home: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <Button
-        title={t("signOut")}
-        style={styles.button}
-        onPress={handleSignOut}
-      />
-    </View>
+    <StyledView>
+      <Button title={t("signOut")} onPress={handleSignOut} />
+    </StyledView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  button: {
-    marginTop: 10,
-  },
-});
 
 export default Home;
