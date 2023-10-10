@@ -2,28 +2,9 @@ import { StackScreenProps } from "@react-navigation/stack";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { StyleSheet, Text, View } from "react-native";
 import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
-import styled from "styled-components/native";
-
-const StyledView = styled.View`
-  flex: 1;
-  padding-top: 20;
-  padding-right: 20;
-  padding-bottom: 20;
-  padding-left: 20;
-  justify-content: center;
-  gap: 20;
-`;
-
-const StyledTextError = styled.Text`
-  padding-top: 20;
-  padding-right: 20;
-  padding-bottom: 20;
-  padding-left: 20;
-  background-color: red;
-  color: #ffffff;
-`;
 
 const auth = getAuth();
 
@@ -57,8 +38,8 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   }
 
   return (
-    <StyledView>
-      {!!value.error && <StyledTextError>{value.error}</StyledTextError>}
+    <View style={styles.container}>
+      {!!value.error && <Text style={styles.errorMessage}>{value.error}</Text>}
 
       <Input
         placeholder={t("email")}
@@ -76,8 +57,27 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
       />
 
       <Button title={t("signUp")} onPress={signUp} />
-    </StyledView>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingTop: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    justifyContent: "center",
+  },
+  errorMessage: {
+    paddingTop: 20,
+    paddingRight: 20,
+    paddingBottom: 20,
+    paddingLeft: 20,
+    backgroundColor: "red",
+    color: "#ffffff",
+  },
+});
 
 export default SignUp;
