@@ -8,6 +8,11 @@ const fr = {
     email: "Courriel",
     password: "Mot de passe",
 
+    weather: {
+      feelsLike: "ressentie",
+      humidity: "d'humidité",
+    },
+
     errors: {
       emailPasswordMandatory:
         "le courriel et le mot de passe sont obligatoires",

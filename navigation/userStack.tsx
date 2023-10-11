@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 
 export default function UserStack() {
   const [weather, setWeather] = useState<string | null>(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -24,12 +24,20 @@ export default function UserStack() {
       const { latitude, longitude } = location.coords;
 
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${openWeatherConfig.apiKey}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${openWeatherConfig.apiKey}&units=metric&lang=${i18n.language}`
       );
-      const temperature = Math.round(response.data.main.temp - 273.15);
-      const condition = response.data.weather[0].main;
+      const temperature = Math.round(response.data.main.temp);
+      const feelsLike = Math.round(response.data.main.feels_like);
+      const condition =
+        response.data.weather[0].description.charAt(0).toUpperCase() +
+        response.data.weather[0].description.slice(1);
+      const humidity = response.data.main.humidity;
 
-      setWeather(`${condition} - ${temperature}°C`);
+      setWeather(
+        `${condition}, ${temperature}°C, ${t(
+          "weather.feelsLike"
+        )} ${feelsLike}°C, ${humidity}%  ${t("weather.humidity")}`
+      );
     })();
   }, []);
 

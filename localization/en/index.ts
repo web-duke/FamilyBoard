@@ -8,6 +8,11 @@ const en = {
     email: "Email",
     password: "Password",
 
+    weather: {
+      feelsLike: "feels like",
+      humidity: "humidity",
+    },
+
     errors: {
       emailPasswordMandatory: "Email and password are mandatory",
     },
