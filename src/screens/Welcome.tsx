@@ -26,7 +26,7 @@ const Welcome: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    padding: 20,
     justifyContent: "center",
   },
 });

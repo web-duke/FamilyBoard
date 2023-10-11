@@ -64,17 +64,11 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
+    padding: 20,
     justifyContent: "center",
   },
   errorMessage: {
-    paddingTop: 20,
-    paddingRight: 20,
-    paddingBottom: 20,
-    paddingLeft: 20,
+    padding: 20,
     backgroundColor: "red",
     color: "#ffffff",
   },
