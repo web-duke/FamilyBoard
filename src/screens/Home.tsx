@@ -1,25 +1,21 @@
-import { getAuth, signOut } from "firebase/auth";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
-import { Button } from "react-native-elements";
+import { StyleSheet, View, Text } from "react-native";
 
-const auth = getAuth();
+interface Task {
+  id: string;
+  title: string;
+  status: "todo" | "wip" | "done";
+  priority: "high" | "normal" | "low";
+}
 
 const Home: React.FC = () => {
+  const [tasks, setTasks] = useState<Task[]>([]);
   const { t } = useTranslation();
-
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error(error);
-    }
-  };
 
   return (
     <View style={styles.container}>
-      <Button title={t("signOut")} onPress={handleSignOut} />
+      <Text>ixi</Text>
     </View>
   );
 };
