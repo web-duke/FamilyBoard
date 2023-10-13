@@ -13,6 +13,22 @@ const fr = {
       humidity: "d'humidité",
     },
 
+    tasks: {
+      addNew: "Ajouter une nouvelle Tache",
+
+      status: {
+        todo: "A faire",
+        wip: "En cours",
+        done: "Fait",
+      },
+
+      priority: {
+        high: "Haute",
+        normal: "Normale",
+        low: "Basse",
+      },
+    },
+
     errors: {
       emailPasswordMandatory:
         "le courriel et le mot de passe sont obligatoires",

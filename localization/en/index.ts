@@ -13,6 +13,22 @@ const en = {
       humidity: "humidity",
     },
 
+    tasks: {
+      addNew: "Add New Task",
+
+      satus: {
+        todo: "To Do",
+        wip: "In Progress",
+        done: "Done",
+      },
+
+      priority: {
+        high: "Haute",
+        normal: "Normale",
+        low: "Basse",
+      },
+    },
+
     errors: {
       emailPasswordMandatory: "Email and password are mandatory",
     },

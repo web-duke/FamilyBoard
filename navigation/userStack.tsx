@@ -6,6 +6,8 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import openWeatherConfig from "../config/openWeather";
 import DrawerComponent from "../src/components/DrawerComponent";
+import { Provider } from "react-redux";
+import store from "../redux/store";
 
 const Stack = createStackNavigator();
 
@@ -42,13 +44,15 @@ export default function UserStack() {
   }, []);
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name={weather || t("familyBoard")}
-          component={DrawerComponent}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name={weather || t("familyBoard")}
+            component={DrawerComponent}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
