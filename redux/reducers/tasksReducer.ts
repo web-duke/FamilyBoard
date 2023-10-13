@@ -11,7 +11,7 @@ const initialState: TaskState = {
 };
 
 interface AddTaskAction extends Action {
-  type: "ADD_TASK";
+  type: typeof ADD_TASK;
   payload: Task;
 }
 
