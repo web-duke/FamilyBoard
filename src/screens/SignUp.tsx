@@ -1,5 +1,6 @@
 import { StackScreenProps } from "@react-navigation/stack";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { getDatabase, ref, set } from "firebase/database";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
@@ -7,6 +8,12 @@ import { Button, Input } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 const auth = getAuth();
+const user = auth.currentUser;
+let userId: string;
+if (user !== null) {
+  userId = user.uid;
+}
+const db = getDatabase();
 
 const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
   const { t } = useTranslation();
@@ -27,7 +34,25 @@ const SignUp: React.FC<StackScreenProps<any>> = ({ navigation }) => {
     }
 
     try {
-      await createUserWithEmailAndPassword(auth, value.email, value.password);
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        value.email,
+        value.password
+      );
+      const user = userCredential.user;
+
+      if (user) {
+        const userId = user.uid;
+
+        const boardRef = ref(db, `boards/${userId}_board`);
+        const newBoard = {
+          id: `${userId}_board`,
+          owner: userId,
+        };
+
+        await set(boardRef, newBoard);
+      }
+
       navigation.navigate(t("signIn"));
     } catch (error) {
       setValue({
